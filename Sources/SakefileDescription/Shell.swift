@@ -167,11 +167,15 @@ public final class Shell: Shelling {
     // MARK: - Attributes
     
     fileprivate let execute: Execute
+    fileprivate static var activeCommand: ShellCommandExecutor?
     
     // MARK: - Init
     
     init(execute: @escaping Execute = Shell.execute) {
         self.execute = execute
+        Signals.trap(signal: .int) { signal in
+            Shell.activeCommand?.process.terminate()
+        }
     }
     
     // MARK: - Shelling
@@ -226,9 +230,13 @@ public final class Shell: Shelling {
                                     arguments: [String],
                                     printing: Bool,
                                     output: Bool) -> ShellCommandExecutor.ShellOutput {
-        return ShellCommandExecutor(launchPath: launchPath,
-                                    arguments: arguments,
-                                    outputStream: StandardOutOutputStream(printing: printing, output: output)).execute()
+        let command = ShellCommandExecutor(launchPath: launchPath,
+                                           arguments: arguments,
+                                           outputStream: StandardOutOutputStream(printing: printing, output: output))
+        Shell.activeCommand = command
+        let output = command.execute()
+        Shell.activeCommand = nil
+        return output
     }
 
 }
