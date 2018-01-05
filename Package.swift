@@ -13,10 +13,9 @@ let package = Package(
         .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.0"),
         .package(url: "https://github.com/xcodeswift/xcproj.git", from: "1.7.0"),
         .package(url: "https://github.com/kylef/Commander.git", from: "0.8.0"),
-        .package(url: "https://github.com/kareman/SwiftShell", from: "4.0.0")
     ],
     targets: [
-        .target(name: "SakeKit", dependencies: ["xcproj","PathKit", "SwiftShell"]),
+        .target(name: "SakeKit", dependencies: ["xcproj","PathKit", "SakefileDescription"]),
         .target(name: "SakefileDescription", dependencies: []),
         .target(name: "sake", dependencies: ["Commander", "SakefileDescription", "SakeKit"]),
         .testTarget(name: "SakeKitTests", dependencies: ["SakeKit"]),

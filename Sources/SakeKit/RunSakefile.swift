@@ -1,6 +1,6 @@
 import Foundation
 import PathKit
-import SwiftShell
+import SakefileDescription
 
 /// Runs the Sakefile.
 public class RunSakefile {
@@ -41,7 +41,7 @@ public class RunSakefile {
                   verbose: verbose,
                   sakefilePath: RunSakefile.sakefilePath,
                   fileDescriptionLibraryPath: { Runtime.filedescriptionLibraryPath() },
-                  runBashCommand: { try runAndPrint(bash: $0) })
+                  runBashCommand: { try Utils.shell.runAndPrint(bash: $0) })
     }
 
     /// Default constructor.
