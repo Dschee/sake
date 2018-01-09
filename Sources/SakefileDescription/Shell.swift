@@ -125,12 +125,12 @@ public final class Shell: Shelling {
     }
 
     public func ask(message: String) -> String {
-        print(message)
+        print(message, terminator: " ")
         var userInput: String? = readLine()
 
         while userInput == nil {
             print("Error, please try again.")
-            print(message)
+            print(message, terminator: " ")
             userInput = readLine()
         }
 
