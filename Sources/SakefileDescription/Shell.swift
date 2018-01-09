@@ -123,5 +123,18 @@ public final class Shell: Shelling {
         if output.exitcode == 0 { return output.stdout }
         throw ShellError(exitCode: output.exitcode)
     }
+
+    public func ask(message: String) -> String {
+        print(message)
+        var userInput: String? = readLine()
+
+        while userInput == nil {
+            print("Error, please try again.")
+            print(message)
+            userInput = readLine()
+        }
+
+        return userInput!
+    }
     
 }
