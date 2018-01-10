@@ -13,6 +13,7 @@
 
 ### Added
 - Sake task to audit the Homebrew formula and execute it from the CI task https://github.com/xcodeswift/sake/pull/51 by @pepibumur.
+- An `ask(message:)` method to ask for user input on the command line. https://github.com/xcodeswift/sake/pull/53 by @Dschee
 
 ## 0.3.0
 
